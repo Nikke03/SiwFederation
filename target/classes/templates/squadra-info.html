@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Squadra Info</title>
+    <link rel="stylesheet" href="/CSS/squadra-info.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar__container">
+        <div class="navbar__logo">
+            <a href="/">
+                <img src="/Image/logo.png" alt="logo" class="logo" />
+                Siw-Federation
+            </a>
+        </div>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/login" class="button"> login  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/register" class="button"> registration  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication != null}">
+                <a href="/Account" class="button"> account  </a>            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<section>
+    <h1 th:text="${squadra.nome}"></h1>
+    <p><strong>Presidente:</strong> <span th:text="${squadra.presidente.nome} + ' ' + ${squadra.presidente.cognome}"></span></p>
+    <p><strong>Anno di Fondazione:</strong> <span th:text="${squadra.annoFondazione}"></span></p>
+    <p><strong>Indirizzo Sede:</strong> <span th:text="${squadra.indirizzoSede}"></span></p>
+    <!--
+    <p><strong>Numero Attaccanti:</strong> <span th:text="${counterAttaccanti}"></span></p>
+    <p><strong>Numero Difensori:</strong> <span th:text="${counterDifensori}"></span></p>
+    <p><strong>Numero Centrocampisti:</strong> <span th:text="${counterACentrocampisti}"></span></p>
+    <p><strong>Numero Portieri:</strong> <span th:text="${counterPortieri}"></span></p>
+    -->
+
+
+    <h2>Giocatori</h2>
+    <div class="giocatori-container">
+        <div th:each="giocatore : ${giocatori}" class="card">
+            <h3 th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"></h3>
+            <p><strong>Ruolo:</strong> <span th:text="${giocatore.ruolo}"></span></p>
+            <p><strong>Luogo di Nascita:</strong> <span th:text="${giocatore.luogoNascita}"></span></p>
+            <p><strong>Data di Nascita:</strong> <span th:text="${giocatore.dataNascita}"></span></p>
+        </div>
+    </div>
+</section>
+<div class="footer__container">
+    <div class="footer__links">
+        <div class="footer__links--wrapper">
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+        </div>
+        <div class="footer__links--wrapper">
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+        </div>
+    </div>
+    <div class="social__media">
+        <div class="social__media--wrap">
+            <div class="footer__logo">
+                <a href="/static" id="footer__logo"><i class="fas faa-gem"></i>NEXT</a>
+            </div>
+            <p class="website__right">next all right reserved</p>
+            <div class="social__icons">
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-airbnb"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

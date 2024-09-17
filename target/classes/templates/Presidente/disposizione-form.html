@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disposizione Squadra</title>
+    <link rel="stylesheet" href="/CSS/disposizione.css">
+</head>
+<body>
+
+<h1>Scegli il modulo:</h1>
+<label for="modulo-select">Scegli il modulo:</label>
+<select name="modulo" id="modulo-select" onchange="cambiaModulo()">
+    <option value="MODULO_442">Modulo 4-4-2</option>
+    <option value="MODULO_352">Modulo 3-5-2</option>
+    <option value="MODULO_433">Modulo 4-3-3</option>
+    <option value="MODULO_4231">Modulo 4-2-3-1</option>
+</select>
+
+<div id="campo" style="margin-top: 20px;"></div>
+
+<div class="giocatori">
+    <h2>Giocatori disponibili</h2>
+    <div id="giocatori-disponibili">
+        <!-- Ciclo Thymeleaf per generare dinamicamente le card -->
+        <div class="card"
+             draggable="true"
+             th:each="giocatore : ${giocatori}"
+             th:id="'giocatore-' + ${giocatore.id}"
+        th:data-id="${giocatore.id}"
+        th:data-nome="${giocatore.nome}"
+        th:data-cognome="${giocatore.cognome}"
+        th:data-ruolo="${giocatore.ruolo}"
+        ondragstart="drag(event)">
+
+        <!-- Dati del giocatore -->
+        <p th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}">Nome Cognome</p>
+        <p th:text="${giocatore.ruolo}">Ruolo</p>
+    </div>
+</div>
+</div>
+
+
+
+<button onclick="salvaDisposizione()">Salva Disposizione</button>
+<button onclick="resetDisposizione()">Reset</button>
+
+<script>
+    const moduli = {
+        "MODULO_442": [
+            "PORTIERE",
+            "DIFENSORE_SINISTRO", "DIFENSORE_CENTRALE1", "DIFENSORE_CENTRALE2", "DIFENSORE_DESTRO",
+            "CENTROCAMPISTA_SINISTRO", "CENTROCAMPISTA_CENTRALE1", "CENTROCAMPISTA_CENTRALE2", "CENTROCAMPISTA_DESTRO",
+            "ATTACCANTE1", "ATTACCANTE2"
+        ],
+        "MODULO_352": [
+            "PORTIERE",
+            "DIFENSORE_SINISTRO", "DIFENSORE_CENTRALE", "DIFENSORE_DESTRO",
+            "CENTROCAMPISTA_SINISTRO", "CENTROCAMPISTA_CENTRALE1", "CENTROCAMPISTA_CENTRALE2", "CENTROCAMPISTA_CENTRALE3", "CENTROCAMPISTA_DESTRO",
+            "ATTACCANTE1", "ATTACCANTE2"
+        ],
+        "MODULO_433": [
+            "PORTIERE",
+            "DIFENSORE_SINISTRO", "DIFENSORE_CENTRALE1", "DIFENSORE_CENTRALE2", "DIFENSORE_DESTRO",
+            "CENTROCAMPISTA_SINISTRO", "CENTROCAMPISTA_CENTRALE", "CENTROCAMPISTA_DESTRO",
+            "ATTACCANTE_SINISTRO", "ATTACCANTE_CENTRALE", "ATTACCANTE_DESTRO"
+        ],
+        "MODULO_4231": [
+            "PORTIERE",
+            "DIFENSORE_SINISTRO", "DIFENSORE_CENTRALE1", "DIFENSORE_CENTRALE2", "DIFENSORE_DESTRO",
+            "CENTROCAMPISTA_DIFENSIVO1", "CENTROCAMPISTA_DIFENSIVO2",
+            "CENTROCAMPISTA_OFFENSIVO_SINISTRO", "CENTROCAMPISTA_OFFENSIVO_CENTRALE", "CENTROCAMPISTA_OFFENSIVO_DESTRO",
+            "ATTACCANTE_CENTRALE"
+        ]
+    };
+
+    function cambiaModulo() {
+        const modulo = document.getElementById("modulo-select").value;
+        const campo = document.getElementById("campo");
+        campo.innerHTML = ''; // Pulisci il campo
+
+        // Crea un wrapper per contenere gli slot
+        const slotWrapper = document.createElement('div');
+        slotWrapper.id = 'slot-wrapper';
+        campo.appendChild(slotWrapper);  // Aggiungiamo il wrapper al campo
+
+        // Aggiungiamo le classi per il modulo selezionato
+        campo.className = '';  // Pulisci eventuali classi residue
+        campo.classList.add(`${modulo.toLowerCase()}`);
+
+        // Genera slot in base al modulo scelto
+        moduli[modulo].forEach((posizione) => {
+            const slot = document.createElement('div');
+
+            // Assegna la classe corrispondente alla posizione del modulo
+            const className = posizione.toLowerCase().replace('_', '-');
+            slot.className = `slot ${className}`; // Assegna le classi CSS
+
+            // Imposta funzionalità drag and drop
+            slot.ondrop = drop;
+            slot.ondragover = allowDrop;
+
+            // Aggiungi lo slot al wrapper
+            slotWrapper.appendChild(slot);
+        });
+    }
+
+    let giocatoriOriginali = [];  // Per salvare i giocatori originali al caricamento
+    let giocatoriSpostati = [];   // Per tenere traccia dei giocatori spostati
+
+
+    // Funzione per salvare i giocatori disponibili al caricamento della pagina
+    function salvaGiocatori() {
+        const giocatori = document.querySelectorAll('#giocatori-disponibili .card');
+        giocatori.forEach(giocatore => {
+            giocatoriOriginali.push({
+                id: giocatore.getAttribute('data-id'),
+                nome: giocatore.getAttribute('data-nome'),
+                cognome: giocatore.getAttribute('data-cognome'),
+                ruolo: giocatore.getAttribute('data-ruolo')
+            });
+        });
+    }
+
+
+    // Drag and Drop
+    function drag(event) {
+        const playerData = {
+            id: event.target.getAttribute('data-id'),
+            nome: event.target.getAttribute('data-nome'),
+            cognome: event.target.getAttribute('data-cognome'),
+            ruolo: event.target.getAttribute('data-ruolo')
+        };
+        event.dataTransfer.setData('player', JSON.stringify(playerData));
+        // Aggiungi l'id della card in modo da poterla rimuovere dopo il drop
+        event.dataTransfer.setData('cardId', event.target.id);  // Salva l'ID della card nel dataTransfer
+    }
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const playerData = JSON.parse(event.dataTransfer.getData('player'));
+        const cardId = event.dataTransfer.getData('cardId');
+
+        // Verifica che lo slot sia vuoto
+        if (event.target.classList.contains("slot") && event.target.children.length === 0) {
+            const playerInfo = document.createElement('div');
+            playerInfo.innerHTML = `<p>${playerData.nome} ${playerData.cognome}</p><p>${playerData.ruolo}</p>`;
+            event.target.appendChild(playerInfo);
+
+            // Rimuovi la card dalla lista utilizzando l'ID
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.remove();  // Rimuovi la card dal DOM
+            }
+
+            // Salva il giocatore spostato in un array
+            giocatoriSpostati.push(playerData);  // Aggiungi il giocatore alla lista dei giocatori spostati
+        }
+    }
+
+
+    function resetDisposizione() {
+        const slots = document.querySelectorAll('.slot');
+
+        // Svuota tutti gli slot
+        slots.forEach(slot => {
+            slot.innerHTML = '';  // Rimuove il contenuto di ogni slot
+        });
+
+        // Ripristina solo i giocatori che erano stati spostati
+        const listaGiocatori = document.getElementById('giocatori-disponibili');
+
+        giocatoriSpostati.forEach(giocatore => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('draggable', true);
+            card.setAttribute('data-id', giocatore.id);
+            card.setAttribute('data-nome', giocatore.nome);
+            card.setAttribute('data-cognome', giocatore.cognome);
+            card.setAttribute('data-ruolo', giocatore.ruolo);
+            card.ondragstart = drag;  // Assegna di nuovo l'evento drag
+
+            // Inserisci il contenuto della card
+            card.innerHTML = `<p>${giocatore.nome} ${giocatore.cognome}</p><p>${giocatore.ruolo}</p>`;
+
+            // Aggiungi la card alla lista dei giocatori disponibili
+            listaGiocatori.appendChild(card);
+        });
+
+        // Pulisci l'array dei giocatori spostati
+        giocatoriSpostati = [];  // Ripuliamo l'array dei giocatori spostati
+    }
+
+    function salvaDisposizione() {
+        const disposizione = [];
+
+        document.querySelectorAll('.slot').forEach(slot => {
+            if (slot.children.length > 0) {
+                const playerElement = slot.children[0];
+                const giocatoreId = playerElement.getAttribute('data-id');
+
+                // Ensure giocatoreId is not null or undefined
+                if (giocatoreId) {
+                    const posizioneCampo = slot.className.split(' ')[1];  // Get the position class
+
+                    disposizione.push({
+                        giocatoreId: giocatoreId,
+                        posizioneCampo: posizioneCampo
+                    });
+                }
+            }
+        });
+
+        // Log the disposizione to check its content
+        console.log('Disposizione data being sent:', disposizione);
+
+        // Send the data via a POST request to the backend
+        fetch('/presidente/squadre/salva-disposizione', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ disposizione: disposizione })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw new Error(err.message); });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Disposition saved successfully:", data);
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error saving disposition: " + error.message);
+            });
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestisci Squadra</title>
+    <link rel="stylesheet" href="/CSS/gestisciSquadra.css">
+
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar__container">
+        <div class="navbar__logo">
+            <a href="/">
+                <img src="/Image/logo.png" alt="logo" class="logo" />
+                Siw-Federation
+            </a>
+        </div>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/login" class="button"> login  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/register" class="button"> registration  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication != null}">
+                <a href="/Account" class="button"> account  </a>            </li>
+        </ul>
+    </div>
+</nav>
+
+<h2>Gestisci la tua squadra: <span th:text="${squadra.nome}"></span></h2>
+
+<h3>Giocatori Disponibili</h3>
+<div class="player-container">
+    <div th:if="${param.error}" class="error-message">
+        <p th:text="'Errore: Giocatore non disponibile.'"></p>
+    </div>
+    <th:block th:each="giocatore : ${giocatoriDisponibili}">
+        <div class="player-card">
+            <div class="player-info">
+                <strong th:text="${giocatore.nome} + ' ' + ${giocatore.cognome}"></strong>
+            </div>
+            <div class="player-info" th:text="'Ruolo: ' + ${giocatore.ruolo}"></div>
+            <div class="player-info" th:text="'Luogo di nascita: ' + ${giocatore.luogoNascita}"></div>
+            <div class="player-info" th:text="'Data di nascita: ' + ${giocatore.dataNascita}"></div>
+
+            <!-- Button to select the player -->
+            <form action="/presidente/squadre/aggiungi_giocatore" method="post">
+                <input type="hidden" name="giocatoreId" th:value="${giocatore.id}"/>
+                <button type="submit" class="tessera-btn">Tessera Giocatore</button>
+            </form>
+        </div>
+    </th:block>
+</div>
+
+<h3>Giocatori Attuali</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Ruolo</th>
+        <th>Azioni</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="giocatore : ${squadra.giocatori}">
+        <tr>
+            <td th:text="${giocatore.nome}"></td>
+            <td th:text="${giocatore.cognome}"></td>
+            <td th:text="${giocatore.ruolo}"></td>
+            <td>
+                <form th:action="@{/presidente/squadre/rimuovi_tesseramento}" method="post">
+                    <input type="hidden" name="giocatoreId" th:value="${giocatore.id}" />
+                    <button type="submit" class="btn btn-danger">Annulla Tesseramento</button>
+                </form>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+
+<!-- Eventuale gestione degli errori -->
+<div th:if="${param.error}">
+    <p th:text="'Errore: Giocatore non disponibile.'"></p>
+</div>
+<div class="footer__container">
+    <div class="footer__links">
+        <div class="footer__links--wrapper">
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+        </div>
+        <div class="footer__links--wrapper">
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+        </div>
+    </div>
+    <div class="social__media">
+        <div class="social__media--wrap">
+            <div class="footer__logo">
+                <a href="/static" id="footer__logo"><i class="fas faa-gem"></i>NEXT</a>
+            </div>
+            <p class="website__right">next all right reserved</p>
+            <div class="social__icons">
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-airbnb"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

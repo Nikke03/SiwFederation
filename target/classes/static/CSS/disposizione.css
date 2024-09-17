@@ -1,0 +1,392 @@
+/* Stili di base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo img {
+    height: 40px;
+}
+
+.navbar__menu {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar__btn a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    background-color: #5cb85c;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar__btn a:hover {
+    background-color: #4cae4c;
+}
+
+/* Selettore modulo */
+select {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Campo da calcio */
+
+
+
+
+
+
+/* Giocatori */
+.giocatori {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.giocatore-card .card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 150px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.giocatore-card .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.giocatore-card .card p {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+/* Footer */
+.footer__container {
+    background-color: #333;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer__links--wrapper {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+}
+
+.footer__links--items {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__links--items h2, .footer__links--items a {
+    color: white;
+    margin: 0;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.footer__links--items a:hover {
+    text-decoration: underline;
+}
+
+.social__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.social__icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social__icons--link {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+
+/* Stile base per il layout */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+}
+/* Campo da calcio */
+#campo {
+    position: relative;
+    width: 650px; /* Campo ingrandito */
+    height: 1000px; /* Campo ingrandito */
+    background-color: #006400;
+    border: 2px solid #fff;
+    margin: 20px auto;
+}
+
+/* Slot */
+.slot {
+    width: 100px;  /* Slot più grandi */
+    height: 100px; /* Slot più grandi */
+    border: 2px dashed white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Modulo 4-4-2 */
+.modulo_442 .portiere {
+    top: 85%; /* Il portiere al centro in basso */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modulo_442 .difensore-sinistro {
+    top: 70%;
+    left: 20%; /* Difensore laterale sinistro */
+}
+.modulo_442 .difensore-centrale1 {
+    top: 70%;
+    left: 40%; /* Difensore centrale sinistro */
+}
+.modulo_442 .difensore-centrale2 {
+    top: 70%;
+    left: 60%; /* Difensore centrale destro */
+}
+.modulo_442 .difensore-destro {
+    top: 70%;
+    left: 80%; /* Difensore laterale destro */
+}
+.modulo_442 .centrocampista-sinistro {
+    top: 50%; /* Centrocampista sinistro */
+    left: 20%;
+}
+.modulo_442 .centrocampista-centrale1 {
+    top: 50%;
+    left: 40%; /* Centrocampista centrale sinistro */
+}
+.modulo_442 .centrocampista-centrale2 {
+    top: 50%;
+    left: 60%; /* Centrocampista centrale destro */
+}
+.modulo_442 .centrocampista-destro {
+    top: 50%;
+    left: 80%; /* Centrocampista destro */
+}
+.modulo_442 .attaccante1 {
+    top: 30%;
+    left: 40%; /* Attaccante sinistro */
+}
+.modulo_442 .attaccante2 {
+    top: 30%;
+    left: 60%; /* Attaccante destro */
+}
+
+/* Modulo 3-5-2 */
+.modulo_352 .portiere {
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modulo_352 .difensore-sinistro {
+    top: 70%;
+    left: 30%; /* Difensore laterale sinistro */
+}
+.modulo_352 .difensore-centrale {
+    top: 70%;
+    left: 50%; /* Difensore centrale */
+}
+.modulo_352 .difensore-destro {
+    top: 70%;
+    left: 70%; /* Difensore laterale destro */
+}
+.modulo_352 .centrocampista-sinistro {
+    top: 50%;
+    left: 20%; /* Centrocampista sinistro */
+}
+.modulo_352 .centrocampista-centrale1 {
+    top: 50%;
+    left: 35%; /* Centrocampista centrale sinistro */
+}
+.modulo_352 .centrocampista-centrale2 {
+    top: 50%;
+    left: 50%; /* Centrocampista centrale */
+}
+.modulo_352 .centrocampista-centrale3 {
+    top: 50%;
+    left: 65%; /* Centrocampista centrale destro */
+}
+.modulo_352 .centrocampista-destro {
+    top: 50%;
+    left: 80%; /* Centrocampista destro */
+}
+.modulo_352 .attaccante1 {
+    top: 30%;
+    left: 45%; /* Attaccante sinistro */
+}
+.modulo_352 .attaccante2 {
+    top: 30%;
+    left: 55%; /* Attaccante destro */
+}
+
+/* Modulo 4-3-3 */
+.modulo_433 .portiere {
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modulo_433 .difensore-sinistro {
+    top: 70%;
+    left: 20%; /* Difensore laterale sinistro */
+}
+.modulo_433 .difensore-centrale1 {
+    top: 70%;
+    left: 40%; /* Difensore centrale sinistro */
+}
+.modulo_433 .difensore-centrale2 {
+    top: 70%;
+    left: 60%; /* Difensore centrale destro */
+}
+.modulo_433 .difensore-destro {
+    top: 70%;
+    left: 80%; /* Difensore laterale destro */
+}
+.modulo_433 .centrocampista-sinistro {
+    top: 50%;
+    left: 30%; /* Centrocampista sinistro */
+}
+.modulo_433 .centrocampista-centrale {
+    top: 50%;
+    left: 50%; /* Centrocampista centrale */
+    transform: translateX(-50%);
+}
+.modulo_433 .centrocampista-destro {
+    top: 50%;
+    left: 70%; /* Centrocampista destro */
+}
+.modulo_433 .attaccante-sinistro {
+    top: 30%;
+    left: 25%; /* Attaccante sinistro */
+}
+.modulo_433 .attaccante-centrale {
+    top: 30%;
+    left: 50%; /* Attaccante centrale */
+    transform: translateX(-50%);
+}
+.modulo_433 .attaccante-destro {
+    top: 30%;
+    left: 75%; /* Attaccante destro */
+}
+
+/* Modulo 4-2-3-1 */
+.modulo_4231 .portiere {
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modulo_4231 .difensore-sinistro {
+    top: 70%;
+    left: 20%; /* Difensore laterale sinistro */
+}
+.modulo_4231 .difensore-centrale1 {
+    top: 70%;
+    left: 40%; /* Difensore centrale sinistro */
+}
+.modulo_4231 .difensore-centrale2 {
+    top: 70%;
+    left: 60%; /* Difensore centrale destro */
+}
+.modulo_4231 .difensore-destro {
+    top: 70%;
+    left: 80%; /* Difensore laterale destro */
+}
+.modulo_4231 .centrocampista-difensivo1 {
+    top: 60%;
+    left: 40%; /* Centrocampista difensivo sinistro */
+}
+.modulo_4231 .centrocampista-difensivo2 {
+    top: 60%;
+    left: 60%; /* Centrocampista difensivo destro */
+}
+.modulo_4231 .centrocampista-offensivo_sinistro {
+    top: 45%;
+    left: 30%; /* Centrocampista offensivo sinistro */
+}
+.modulo_4231 .centrocampista-offensivo_centrale {
+    top: 45%;
+    left: 50%; /* Centrocampista offensivo centrale */
+    transform: translateX(-50%);
+}
+.modulo_4231 .centrocampista-offensivo_destro {
+    top: 45%;
+    left: 70%; /* Centrocampista offensivo destro */
+}
+.modulo_4231 .attaccante-centrale {
+    top: 30%;
+    left: 50%; /* Attaccante centrale */
+    transform: translateX(-50%);
+}
+
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #cc5200;
+}
