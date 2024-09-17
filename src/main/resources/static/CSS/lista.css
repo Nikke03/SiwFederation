@@ -1,0 +1,292 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 1rem;
+}
+
+
+/* Navbar */
+.navbar {
+    background-color: #222;
+    padding: 1rem;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Container for the logo and text */
+.navbar__logo {
+    display: flex; /* Use Flexbox to align items */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+
+.navbar__logo a {
+    color: #fff; /* Apply color to the link */
+    display: flex; /* Flexbox on <a> to handle its content */
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* Logo styling */
+.logo {
+    height: 60px;
+    margin-right: 10px;
+}
+
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar__item {
+    display: inline;
+}
+
+.navbar__links {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar__links:hover {
+    color: #ff6600;
+}
+
+/* Toggle button for mobile menu */
+.navbar__toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.navbar__toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 4px 0;
+}
+
+.navbar__btn .button {
+    color: #fff;
+    background-color: #ff6600;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.navbar__btn .button:hover {
+    background-color: #cc5200;
+}
+
+.button {
+    color: #fff;
+    background-color: #ff6600;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #cc5200;
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* Card container to wrap cards nicely */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Card styles */
+.card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.card p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.card strong {
+    color: #333;
+}
+
+/* Button styles */
+.button {
+    display: inline-block;
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #cc5200;
+}
+
+/* Links */
+a {
+    color: #ff6600;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.squadre-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+    width: 80%;
+    max-width: 600px;
+}
+
+.squadra-item {
+    background-color: white;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.squadra-item:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.squadra-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff6600;
+}
+
+.squadra-button {
+    background-color: #ff6600;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.squadra-button:hover {
+    background-color: #d25400;
+}
+
+@media (max-width: 768px) {
+    .squadra-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .squadra-button {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+/* Footer */
+.footer__container {
+    background-color: #333;
+    padding: 2rem 0;
+    color: #fff;
+    text-align: center;
+}
+
+.footer__links--wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.footer__links--items {
+    margin-bottom: 1rem;
+}
+
+.footer__links--items h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.footer__links--items a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer__links--items a:hover {
+    color: #ff6600;
+}

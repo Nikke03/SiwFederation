@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggiungi Giocatore</title>
+    <link rel="stylesheet" href="/CSS/form.css"> <!-- Add your CSS file if needed -->
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar__container">
+        <div class="navbar__logo">
+            <a href="/">
+                <img src="/Image/logo.png" alt="logo" class="logo" />
+                Siw-Federation
+            </a>
+        </div>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/login" class="button"> login  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/register" class="button"> registration  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication != null}">
+                <a href="/Account" class="button"> account  </a>            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1>Aggiungi un nuovo giocatore</h1>
+
+<form th:action="@{/Admin/giocatori/aggiungi}" th:object="${giocatore}" method="post">
+    <div>
+        <label for="nome">Nome:</label>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+        <input type="text" id="nome" name="nome" required>
+    </div>
+    <div>
+        <label for="cognome">Cognome:</label>
+        <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}" class="error"></span>
+        <input type="text" id="cognome" name="cognome" required>
+    </div>
+
+    <div>
+        <label for="dataNascita">Data di Nascita:</label>
+        <span th:if="${#fields.hasErrors('dataNascita')}" th:errors="*{dataNascita}" class="error"></span>
+        <input type="date" id="dataNascita" name="dataNascita" required>
+    </div>
+    <div>
+        <label for="luogoNascita">Luogo di Nascita:</label>
+        <span th:if="${#fields.hasErrors('luogoNascita')}" th:errors="*{luogoNascita}" class="error"></span>
+        <input type="text" id="luogoNascita" name="luogoNascita" required>
+    </div>
+
+    <div>
+        <label for="ruolo">Ruolo:</label>
+        <select id="ruolo" th:field="*{ruolo}" required>
+            <option value="" disabled selected>Seleziona il ruolo</option>
+            <option value="Difensore">Difensore</option>
+            <option value="Attaccante">Attaccante</option>
+            <option value="Centrocampista">Centrocampista</option>
+            <option value="Portiere">Portiere</option>
+        </select>
+    </div>
+
+    <button type="submit">Aggiungi Giocatore</button>
+</form>
+
+<p><a href="/Admin/ListaGiocatori">Visualizza tutti i giocatori</a></p>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crea Squadra</title>
+    <link rel="stylesheet" href="/CSS/form.css">
+
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar__container">
+        <div class="navbar__logo">
+            <a href="/">
+                <img src="/Image/logo.png" alt="logo" class="logo" />
+                Siw-Federation
+            </a>
+        </div>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/login" class="button"> login  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication == null}">
+                <a href="/register" class="button"> registration  </a>            </li>
+            <li class="navbar__btn" th:if="${authentication != null}">
+                <a href="/Account" class="button"> account  </a>            </li>
+        </ul>
+    </div>
+</nav>
+
+<h1>Crea una nuova squadra per il presidente <span th:text="${presidente.nome}"></span></h1>
+
+<form th:action="@{/admin/presidenti/{id}/creaSquadra(id=${presidente.id})}" method="post" th:object="${squadra}">
+
+    <!-- Nome della Squadra -->
+    <label for="nome">Nome della Squadra:</label>
+    <input type="text" id="nome" th:field="*{nome}" required>
+    <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error"></span>
+
+    <br>
+
+    <!-- Anno di Fondazione -->
+    <label for="annoFondazione">Anno di Fondazione:</label>
+    <input type="number" id="annoFondazione" th:field="*{annoFondazione}" required min="1800" max="2024">
+    <span th:if="${#fields.hasErrors('annoFondazione')}" th:errors="*{annoFondazione}" class="error"></span>
+
+    <br>
+
+    <label for="indirizzoSede">indirizzo Sede:</label>
+    <input type="text" id="indirizzoSede" th:field="*{indirizzoSede}" required>
+    <span th:if="${#fields.hasErrors('indirizzoSede')}" th:errors="*{indirizzoSede}" class="error"></span>
+
+    <br>
+
+
+    <!-- Bottone per inviare il form -->
+    <button type="submit">Crea Squadra</button>
+
+</form>
+<div class="footer__container">
+    <div class="footer__links">
+        <div class="footer__links--wrapper">
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+        </div>
+        <div class="footer__links--wrapper">
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+            <div class="footer__links--items">
+                <h2>about Us</h2>
+                <a href="/static">ow it works</a>
+                <a href="/static">explore</a>
+                <a href="/static">gigi</a>
+                <a href="/static">dai</a>
+                <a href="/static">term</a>
+            </div>
+        </div>
+    </div>
+    <div class="social__media">
+        <div class="social__media--wrap">
+            <div class="footer__logo">
+                <a href="/static" id="footer__logo"><i class="fas faa-gem"></i>NEXT</a>
+            </div>
+            <p class="website__right">next all right reserved</p>
+            <div class="social__icons">
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-airbnb"></i>
+                </a>
+                <a href="/static" class="social__icons--link" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
